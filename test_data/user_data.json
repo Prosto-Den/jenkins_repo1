@@ -1,0 +1,19 @@
+{
+    "user_1": {
+        "first_name": "Prost0",
+        "last_name": "Den",
+        "email": "prost0pochta@sobaka.com",
+        "age": 23,
+        "salary": 100000,
+        "department": "FBC"
+    },
+
+    "user_2": {
+        "first_name": "Vtoroy",
+        "last_name": "User",
+        "email": "pochta.email@bipki.com",
+        "age": 10,
+        "salary": 1,
+        "department": "F.E.A.R."
+    }
+}

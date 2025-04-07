@@ -1,0 +1,14 @@
+{
+  "URL": "https://demoqa.com/",
+  "current_browser": "CHROME",
+
+  "language": "en",
+
+  "delay": 10,
+
+  "fullscreen": true,
+  "incognito": true,
+  "load_strategy": "none",
+
+  "level_log": "INFO"
+}
