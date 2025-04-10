@@ -6,7 +6,7 @@ from ..settings.configManipulator import ConfigManipulator
 from screeninfo import get_monitors
 from screeninfo.common import Monitor
 from framework.singleton.singleton import Singleton
-
+from framework.logger.logger import Logger
 
 class Driver(metaclass=Singleton):
     instance: WebDriver | None = None
@@ -15,6 +15,7 @@ class Driver(metaclass=Singleton):
 
     @classmethod
     def init(cls):
+        Logger.instance.info(f'Используемый браузер {ConfigManipulator.data().current_browser}')
         cls.instance = cls.__create_driver()
         cls.waiter = WebDriverWait(cls.instance, ConfigManipulator.data().delay)
         cls.EC = EC
