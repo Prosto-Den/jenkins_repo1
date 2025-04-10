@@ -10,23 +10,23 @@ class ConfigManipulator(BaseDataManipulator):
     @classmethod
     def init(cls, file_path: str = None):
         if cls.__data is None:
-            if file_path is None:
-                file_path =  os.path.dirname(__file__) + '/config.json'
-
-            with open(file_path, encoding='utf-8') as file:
-                data = json.load(file)
-            cls.__read_env_var(data)
+            file_path = os.path.dirname(__file__) + '/config.json' if file_path is None else file_path
+            data = cls.__read_config(file_path)
             cls.__data = ConfigModel(**data)
 
     @staticmethod
-    def __read_env_var(data: dict) -> None:
+    def __read_config(file_path: str) -> dict:
         if (env_config := os.environ.get('config')) is not None:
-            data = json.loads(env_config)
-            return
+            return json.loads(env_config)
 
-        for key in data.keys():
+        with open(file_path, encoding='utf-8') as file:
+            result: dict = json.load(file)
+
+        for key in result.keys():
             if (env_var := os.environ.get(key)) is not None:
-                data[key] = env_var
+                result[key] = env_var
+
+        return result
 
     @classmethod
     def data(cls) -> ConfigModel:
