@@ -15,8 +15,14 @@ class ConfigManipulator(BaseDataManipulator):
 
             with open(file_path, encoding='utf-8') as file:
                 data = json.load(file)
-
+            cls.__read_env_var(data)
             cls.__data = ConfigModel(**data)
+
+    @staticmethod
+    def __read_env_var(data: dict) -> None:
+        for key in data.keys():
+            if (env_var := os.environ.get(key)) is not None:
+                data[key] = env_var
 
     @classmethod
     def data(cls) -> ConfigModel:
