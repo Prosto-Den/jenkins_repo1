@@ -20,6 +20,10 @@ class ConfigManipulator(BaseDataManipulator):
 
     @staticmethod
     def __read_env_var(data: dict) -> None:
+        if (env_config := os.environ.get('config')) is not None:
+            data = json.loads(env_config)
+            return
+
         for key in data.keys():
             if (env_var := os.environ.get(key)) is not None:
                 data[key] = env_var
